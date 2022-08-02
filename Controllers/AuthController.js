@@ -21,3 +21,26 @@ export const registerUser = async (req,res) => {
         
     }
 }
+
+//login  user azni ise if dongudude degiskenle bcr deki compara ekomutu ile karsilastiri dogruysa donus verir
+
+export const loginUser = async ( req,res) =>{
+
+    const { username , password} = req.body
+
+    try {
+         const user = await UserModel.findOne({username:username})
+
+         if(user)
+         {
+          const validity = await bcrypt.compare(password ,user.password)
+          validity ? res.status(200).json(user) : res.status(400).json('wrong password')
+         }
+         else{
+            res.status(404).json('user  yok')
+         }
+    } catch (error) {
+        res.status(500).json({message:error.message})
+    }
+
+}
