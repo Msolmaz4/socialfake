@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import Auth from './Routes/Auth.js'
 import UserRoute from './Routes/UserRoute.js'
+import PostRoute from './Routes/PostRoute.js'
 
 
 dotenv.config()
@@ -26,3 +27,4 @@ mongoose.connect(process.env.MONGO_DB,{useNewUrlParser :true , useUnifiedTopolog
 //router 
 app.use('/auth', Auth)
 app.use('/user', UserRoute)
+app.use('/post',PostRoute)
